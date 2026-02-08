@@ -1,0 +1,87 @@
+##################################
+# SQL Server - Arquivos de Banco
+##################################
+# Data e Log
+*.mdf
+*.ndf
+*.ldf
+
+# Backups
+*.bak
+*.trn
+*.dif
+
+##################################
+# SQL Server - Temp / Dump
+##################################
+*.tmp
+*.temp
+*.dmp
+*.sqldump
+
+##################################
+# SQL Server Management Studio (SSMS)
+##################################
+# Configurações e cache locais
+*.ssmssettings
+*.user
+*.suo
+.vs
+**/.vs/
+
+##################################
+# Scripts Gerados Automaticamente
+##################################
+# Scripts de manutenção gerados por ferramentas
+*_MaintenancePlan.sql
+*_IndexMaintenance.sql
+*_BackupJob.sql
+
+##################################
+# Logs de Jobs / Agentes
+##################################
+jobhistory.log
+sqlagent.log
+
+##################################
+# Erros e logs
+##################################
+ERRORLOG
+ERRORLOG.*
+*.xel        # Extended Events
+*.trc        # SQL Trace
+
+##################################
+# Importação / Exportação
+##################################
+*.bcp
+*.fmt
+*.xml
+
+##################################
+# Dados Sensíveis
+##################################
+# Strings de conexão e segredos
+*.env
+*.env.*
+connectionStrings.config
+
+##################################
+# Ferramentas de Terceiros
+##################################
+# Redgate / Apex / similares
+*.rgp
+*.sqlprompt
+
+##################################
+# Sistema Operacional
+##################################
+# Windows
+Thumbs.db
+Desktop.ini
+
+##################################
+# IDEs (caso use VS Code ou outros)
+##################################
+.vscode/
+.history/
