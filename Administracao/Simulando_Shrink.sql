@@ -39,8 +39,8 @@ SELECT name AS Name, size * 8 /1024. as Tamanho_MB,
   FROM sys.database_files
 /*
 Name			Tamanho_MB	Espaco_Utilizado_MB	Percentual_Utilizado
-DB_TesteLog		6.250000	4.187500			67.000000000000000
-DB_TesteLog_log	2.250000	1.195312			53.125000000000000
+DB_TesteLog		8.000000	3.812500			47.656250000000000
+DB_TesteLog_log	8.000000	0.718750			8.984375000000000
 */
 
 -- Inclui 150.000 linhas na tabela TB_Shrink
