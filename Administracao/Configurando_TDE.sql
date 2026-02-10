@@ -1,7 +1,7 @@
 /********************************************************
  Autor: Jhadson Santos
  
- Assunto: Configuração do Transport Data Encryption (TDE)
+ Assunto: Configuração do Transparent Data Encryption (TDE)
  Material de apoio: 
  https://learn.microsoft.com/pt-br/sql/relational-databases/security/encryption/transparent-data-encryption?view=sql-server-ver16
  https://learn.microsoft.com/pt-br/sql/t-sql/statements/create-certificate-transact-sql?view=sql-server-ver16
