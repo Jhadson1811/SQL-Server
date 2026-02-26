@@ -1,13 +1,13 @@
-/***********************************************************************************************************************************
+Ôªø/***********************************************************************************************************************************
  Autor: Jhadson Santos
  
- Assunto: O objetivo do script È simular o Forwarded Records em uma tabela Heap, em uma tabela sem a presenÁa de um Ìndice clustered, 
- as linhas s„o armazenadas sem ordem lÛgica, pode ocorrer de uma linha j· inserida (Pagina A) receber uma atualizaÁ„o que excede o 
- tamanho da p·gina, com isso, a linha È movida para outra p·gina (Pagina B), deixando um ponteiro (Forwarding Pointer) na p·gina de 
- origem apontando para a nova localizaÁ„o. 
+ Assunto: O objetivo do script √© simular o Forwarded Records em uma tabela Heap, em uma tabela sem a presen√ßa de um √≠ndice clustered, 
+ as linhas s√£o armazenadas sem ordem l√≥gica, pode ocorrer de uma linha j√° inserida (Pagina A) receber uma atualiza√ß√£o que excede o 
+ tamanho da p√°gina, com isso, a linha √© movida para outra p√°gina (Pagina B), deixando um ponteiro (Forwarding Pointer) na p√°gina de 
+ origem apontando para a nova localiza√ß√£o. 
 
- Antes do Forwarded Records: IAM -> P·gina A -> Linha
- Depois do Forwarded Records: IAM -> P·gina A -> Ponteiro -> P·gina B -> Linha 
+ Antes do Forwarded Records: IAM -> P√°gina A -> Linha
+ Depois do Forwarded Records: IAM -> P√°gina A -> Ponteiro -> P√°gina B -> Linha 
 
  Material de apoio: 
  https://learn.microsoft.com/en-us/sql/relational-databases/indexes/heaps-tables-without-clustered-indexes?view=sql-server-ver17
@@ -39,16 +39,16 @@ CREATE TABLE dbo.TB_ForwardedRecords
 )
 GO 
 
--- InserÁ„o de algumas linhas 
+-- Inser√ß√£o de algumas linhas 
 INSERT INTO dbo.TB_ForwardedRecords(Nome, Descricao) VALUES 
 ('Linha 1', REPLICATE('A', 2000)), 
 ('Linha 2', REPLICATE('B', 2000)),
-('Linha 2', REPLICATE('C', 2000)),
-('Linha 2', REPLICATE('D', 2000)),
-('Linha 2', REPLICATE('F', 2000)) 
+('Linha 3', REPLICATE('C', 2000)),
+('Linha 4', REPLICATE('D', 2000)),
+('Linha 5', REPLICATE('F', 2000)) 
 GO 
 
--- Consumo de p·ginas no TABLE SCAN
+-- Consumo de p√°ginas no TABLE SCAN
 SET STATISTICS IO ON 
 SELECT * FROM dbo.TB_ForwardedRecords
 -- Table 'TB_ForwardedRecords'. Scan count 1, logical reads 2
@@ -79,13 +79,13 @@ SELECT	a.index_type_desc,
 
 -- forwarded_record_count = 1
 
--- Consumo de p·ginas no TABLE SCAN
+-- Consumo de p√°ginas no TABLE SCAN
 SET STATISTICS IO ON 
 SELECT * FROM dbo.TB_ForwardedRecords
 --Table 'TB_ForwardedRecords'. Scan count 1, logical reads 4
 SET STATISTICS IO OFF
 
--- Retorna o endereÁo de todas as p·ginas que compÙe a tabela
+-- Retorna o endere√ßo de todas as p√°ginas que comp√¥e a tabela
 SELECT a.allocation_unit_type_desc,
 	   a.is_allocated,
 	   a.is_iam_page,
@@ -94,39 +94,39 @@ SELECT a.allocation_unit_type_desc,
   FROM sys.dm_db_database_page_allocations(DB_ID(),OBJECT_ID('dbo.TB_ForwardedRecords', 'U'),0,NULL,'DETAILED') as a
  WHERE a.is_allocated = 1
  ORDER BY a.page_type DESC, a.allocated_page_page_id
--- 1a EXEC: P·ginas 80(IAM) 320, 321, 322
+-- 1a EXEC: P√°ginas 41(IAM) 248, 249, 250
 
--- Retorna em que p·gina cada linha est·
+-- Retorna em que p√°gina cada linha est√°
 SELECT b.*, 
 	   a.*
   FROM dbo.TB_ForwardedRecords as a
  CROSS APPLY sys.fn_PhysLocCracker(%%physloc%%) AS b
 
--- Visualiza o conte˙do das p·ginas 
+-- Visualiza o conte√∫do das p√°ginas 
 DBCC TRACEON(3604) 
-DBCC PAGE(DB_Heap, 1, 320, 3)
+DBCC PAGE(DB_Heap, 1, 248, 3)
 /******************************************************************************
--- O registro 'Linha 1' saiu da pagina 320 e foi direcionado para a pagina 322
+-- O registro 'Linha 1' saiu da pagina 248 e foi direcionado para a pagina 250
 
 Record Type = FORWARDING_STUB       Record Attributes =                 Record Size = 9
 
-Memory Dump @0x000000F7A15F8060
+Memory Dump @0x000000F79F1F8060
 
-0000000000000000:   04420100 00010000 00                          .B.......
-Forwarding to  =  file 1 page 322 slot 0 
+0000000000000000:   04fa0000 00010000 00                          .√∫.......
+Forwarding to  =  file 1 page 250 slot 0  
 ******************************************************************************/
 
-DBCC PAGE(DB_Heap, 1, 321, 3)
+DBCC PAGE(DB_Heap, 1, 249, 3)
 
-DBCC PAGE(DB_Heap, 1, 322, 3)
+DBCC PAGE(DB_Heap, 1, 250, 3)
 /******************************************************************************
--- O registro 'Linha 1' presente na p·gina 322
+-- O registro 'Linha 1' presente na p√°gina 322
 
 Record Type = FORWARDED_RECORD      Record Attributes =  NULL_BITMAP VARIABLE_COLUMNS
 Record Size = 7036                  
-Memory Dump @0x000000F7A1FF8060
+Memory Dump @0x000000F79C5F8060
 
-0000000000000000:   32000800 01000000 03000003 001a0072 1b7c9b4c  2..............r.|?L
+0000000000000000:   32000800 01000000 03000003 001a0072 1b7c9b4c  2..............r.|¬õL
 0000000000000014:   696e6861 20315858 58585858 58585858 58585858  inha 1XXXXXXXXXXXXXX
 0000000000000028:   58585858 58585858 58585858 58585858 58585858  XXXXXXXXXXXXXXXXXXXX
 ******************************************************************************/
