@@ -1,9 +1,9 @@
 /********************************************************
  Autor: Jhadson Santos
  
-Assunto: Criacao de usuários de Banco de Dados e Database Roles
+ Assunto: Criacao de usuários de Banco de Dados e Database Roles
 
-Material de apoio: 
+ Material de apoio: 
  https://learn.microsoft.com/en-us/sql/relational-databases/security/authentication-access/create-a-database-user?view=sql-server-ver17
  https://learn.microsoft.com/en-us/sql/t-sql/statements/create-user-transact-sql?view=sql-server-ver17
  https://learn.microsoft.com/en-us/sql/relational-databases/security/authentication-access/database-level-roles?view=sql-server-ver17
