@@ -5,6 +5,7 @@
  sequencial aumenta a frequência de divisão de páginas (Page Splits), pois ocorre a inserção de registros no meio 
  da árvore B, como consequência, temos o aumento de IO, fragmentação e baixa perfomance ao efetuar operações de INSERT. 
 
+
  Objetivo: O objetivo do script é comparar o uso de um índice clustered para uma PK sequencial e não sequencial. 
 
  Material de apoio: 
