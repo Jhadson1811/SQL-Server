@@ -1,7 +1,7 @@
-/********************************************************
+Ôªø/********************************************************
  Autor: Jhadson Santos
  
- Assunto: Criacao de usu·rios de Banco de Dados e Database Roles
+ Assunto: Criacao de usu√°rios de Banco de Dados e Database Roles
 
  Material de apoio: 
  https://learn.microsoft.com/en-us/sql/relational-databases/security/authentication-access/create-a-database-user?view=sql-server-ver17
@@ -27,10 +27,10 @@ GO
 USE DB_USERS 
 GO 
 
--- Cria usu·rio
+-- Cria usu√°rio
 CREATE USER User1 FOR LOGIN App_Login1
 
--- Verifica se o usu·rio pertence a um role 
+-- Verifica se o usu√°rio pertence a um role 
 EXECUTE AS USER = 'User1'
 SELECT IS_MEMBER('public') AS is_public_member 
 REVERT 
@@ -41,7 +41,7 @@ SELECT IS_MEMBER('db_datareader') AS is_public_member
 REVERT 
 GO 
 
--- Add usu·rio em dois databases roles
+-- Add usu√°rio em dois databases roles
 ALTER ROLE db_datareader ADD MEMBER User1
 GO 
 ALTER ROLE db_ddladmin ADD MEMBER User1
@@ -59,7 +59,7 @@ by manipulating code that might get executed under high privileges
 and their actions should be monitored.
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++****/
 
--- Verifica os Roles do usu·rio 
+-- Verifica os Roles do usu√°rio 
 SELECT rdp.name AS role_name, 
        rdm.name AS member_name
   FROM sys.database_role_members AS rm

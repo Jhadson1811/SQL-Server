@@ -1,12 +1,12 @@
-/*****************************************************************************************************************
+Ôªø/*****************************************************************************************************************
  Autor: Jhadson Santos
  
- Assunto: O Ìndice clustered defini a ordem fÌsica dos dados na tabela. A definiÁ„o de um Ìndice clustered n„o 
- sequencial aumenta a frequÍncia de divis„o de p·ginas (Page Splits), pois ocorre a inserÁ„o de registros no meio 
- da ·rvore B, como consequÍncia, temos o aumento de IO, fragmentaÁ„o e baixa perfomance ao efetuar operaÁıes de INSERT. 
+ Assunto: O √≠ndice clustered defini a ordem f√≠sica dos dados na tabela. A defini√ß√£o de um √≠ndice clustered n√£o 
+ sequencial aumenta a frequ√™ncia de divis√£o de p√°ginas (Page Splits), pois ocorre a inser√ß√£o de registros no meio 
+ da √°rvore B, como consequ√™ncia, temos o aumento de IO, fragmenta√ß√£o e baixa perfomance ao efetuar opera√ß√µes de INSERT. 
 
 
- Objetivo: O objetivo do script È comparar o uso de um Ìndice clustered para uma PK sequencial e n„o sequencial. 
+ Objetivo: O objetivo do script √© comparar o uso de um √≠ndice clustered para uma PK sequencial e n√£o sequencial. 
 
  Material de apoio: 
  https://learn.microsoft.com/pt-br/sql/relational-databases/indexes/reorganize-and-rebuild-indexes?view=sql-server-ver17
@@ -25,7 +25,7 @@ GO
 USE DB_Fragmentacao
 GO
 
--- Cria tabela com a Ìndice clustered sequencial 
+-- Cria tabela com a √≠ndice clustered sequencial 
 DROP TABLE IF EXISTS dbo.Cliente_PkSequencial
 GO 
 CREATE TABLE dbo.Cliente_PkSequencial
@@ -37,7 +37,7 @@ CREATE TABLE dbo.Cliente_PkSequencial
 	OBS CHAR(3000) NOT NULL
 )
 
--- Cria tabela com a Ìndice clustered n„o sequencial 
+-- Cria tabela com a √≠ndice clustered n√£o sequencial 
 DROP TABLE IF EXISTS dbo.Cliente_PkRandom
 GO 
 CREATE TABLE dbo.Cliente_PkRandom
@@ -70,7 +70,7 @@ BEGIN
 END 
 GO 
 
--- Inclui 100.000 linhas na PK n„o sequencial ( 3min e 08s)
+-- Inclui 100.000 linhas na PK n√£o sequencial ( 3min e 08s)
 DECLARE @i int = 20000
 
 WHILE @i <= 120000 
@@ -92,7 +92,7 @@ SELECT a.index_type_desc,
 	   a.forwarded_record_count,
        a.avg_fragmentation_in_percent
   FROM sys.dm_db_index_physical_stats(DB_ID(),OBJECT_ID('dbo.Cliente_PkSequencial', 'U'),NULL,NULL,'DETAILED') as a
--- FragmentaÁ„o Externa: 0.37%
+-- Fragmenta√ß√£o Externa: 0.37%
 
 SELECT a.index_type_desc, 
 	   a.index_level ,
@@ -102,13 +102,13 @@ SELECT a.index_type_desc,
 	   a.forwarded_record_count,
        a.avg_fragmentation_in_percent
   FROM sys.dm_db_index_physical_stats(DB_ID(),OBJECT_ID('dbo.Cliente_PkRandom', 'U'),NULL,NULL,'DETAILED') as a
--- FragmentaÁ„o Externa: 0.99%
+-- Fragmenta√ß√£o Externa: 0.99%
 
--- Rebuild do Ìndice random com o fator de preechimento 60%
+-- Rebuild do √≠ndice random com o fator de preechimento 60%
 ALTER INDEX PK_Cliente_GUID ON dbo.Cliente_PkRandom REBUILD WITH (FILLFACTOR = 60)
--- FragmentaÁ„o Externa: 0.01%
+-- Fragmenta√ß√£o Externa: 0.01%
 
---Insere 10.000 registros apÛs o Rebuild com o fator de preechimento
+--Insere 10.000 registros ap√≥s o Rebuild com o fator de preechimento
 DECLARE @i int = 110000
 
 WHILE @i <= 120000 
@@ -119,7 +119,7 @@ BEGIN
 	SET @i += 1
 END 
 GO 
--- FragmentaÁ„o Externa: 0.30%
+-- Fragmenta√ß√£o Externa: 0.30%
 
 USE master
 GO

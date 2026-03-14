@@ -1,7 +1,7 @@
-/*****************************************************************************************************************************
+Ôªø/*****************************************************************************************************************************
  Autor: Jhadson Santos
  
- Assunto: EstratÈgias de Ìndices para GROUP BY
+ Assunto: Estrat√©gias de √≠ndices para GROUP BY
 ******************************************************************************************************************************/
 
 USE master 
@@ -45,7 +45,7 @@ SELECT * INTO dbo.Customer from AdventureWorks.Sales.Customer
               FirstName
 
  /*
- ---- Consulta sem ÌndÌces ----
+ ---- Consulta sem √≠nd√≠ces ----
  Table 'Customer'. Scan count 1, logical reads 155
  Table 'Person'. Scan count 1, logical reads 146   2.35MB
  */
@@ -56,7 +56,7 @@ SELECT * INTO dbo.Customer from AdventureWorks.Sales.Customer
  DROP INDEX dta_index_Customer ON dbo.Customer
  DROP INDEX dta_index_Person ON dbo.Person
   /*
- ---- Consulta executada com a sugest„o do Database Engine Tuning Advisor (DTA)
+ ---- Consulta executada com a sugest√£o do Database Engine Tuning Advisor (DTA)
  Table 'Person'. Scan count 1, logical reads 106
  Table 'Customer'. Scan count 1, logical reads 56  1.26MB
  */
@@ -105,7 +105,7 @@ SELECT * INTO dbo.Customer from AdventureWorks.Sales.Customer
   ORDER BY qtdeNomes desc
 
  /*
-   Sem Ìndice algum
+   Sem √≠ndice algum
    Table 'Person'. Scan count 1, logical reads 145  1.13MB
  */
 

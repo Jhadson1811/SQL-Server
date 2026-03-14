@@ -1,8 +1,8 @@
-/*****************************************************************************************************************************
+Ôªø/*****************************************************************************************************************************
  Autor: Jhadson Santos
 
- Assunto: Script para conferir o uso dos indÌces, a primeira consulta permite conferir a quantidade de uso das operaÁıes SEEK, 
- SCAN e LooKup, a segunda permite conferir a estrutura de colunas de cada Ìndice e a terceira os Ìndices duplicados. 
+ Assunto: Script para conferir o uso dos ind√≠ces, a primeira consulta permite conferir a quantidade de uso das opera√ß√µes SEEK, 
+ SCAN e LooKup, a segunda permite conferir a estrutura de colunas de cada √≠ndice e a terceira os √≠ndices duplicados. 
  
 ******************************************************************************************************************************/
 
@@ -12,7 +12,7 @@ GO
 /******************** Verifica Indices *************************/
 
 
--- Quantidade de operaÁıes SEEK, SCANS e LOOKUPS 
+-- Quantidade de opera√ß√µes SEEK, SCANS e LOOKUPS 
      SELECT OBJECT_NAME(i.object_id) Tabela, 
             i.name,
             i.index_id, 
@@ -33,7 +33,7 @@ GO
    ORDER BY totalOperacoes desc
 
 
--- Estrutura de colunas do Ìndice
+-- Estrutura de colunas do √≠ndice
        select s.name AS schema_name,
               t.name AS tabela,
               i.name, 
@@ -60,7 +60,7 @@ GO
                i.name, 
                i.type_desc;
 
--- Õndices duplicados 
+-- √çndices duplicados 
 WITH Indices as (
     
     select s.name AS schema_name,

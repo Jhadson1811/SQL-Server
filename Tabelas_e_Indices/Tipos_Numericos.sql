@@ -1,7 +1,7 @@
-/********************************************************
+ï»¿/********************************************************
  Autor: Jhadson Santos
  
-Assunto: O objetivo do script é apresentar o uso dos principais tipos de dados númerico no SQL Server.
+Assunto: O objetivo do script Ã© apresentar o uso dos principais tipos de dados nÃºmerico no SQL Server.
 
 Tipos de dados: bigint, int, smallint, tinyint
 decimal, float
@@ -45,9 +45,9 @@ CREATE TABLE DB_tiposNumericos.dbo.TiposNumericos (
 );
 
 INSERT INTO DB_tiposNumericos.dbo.TiposNumericos VALUES
--- Range mínimo para cada tipo de dado númerico 
+-- Range mÃ­nimo para cada tipo de dado nÃºmerico 
 (0, -32768, -2147483648, -9223372036854775808, -9, - 1.79E+308, - 3.40E+38, -922337203685477.5808 ),
--- Range máximo para cada tipo de dado númerico (Exceto Decimal, pois depende da precisao e escala Decimal(p, s))  
+-- Range mÃ¡ximo para cada tipo de dado nÃºmerico (Exceto Decimal, pois depende da precisao e escala Decimal(p, s))  
 (255, -32767, -2147483647, 9223372036854775807, 9, 1.79E+308,  3.40E+38, -922337203685477.5807 )
 
 
@@ -124,7 +124,7 @@ GO
  smallmoney Range -214,748.3648 to 214,748.3647 4 bytes
 *********************************************************/
 
--- Máximo de precisão 4 casas decimais
+-- MÃ¡ximo de precisÃ£o 4 casas decimais
 DECLARE @Teste1 money = 9999.999888
 DECLARE @Teste2 smallmoney = 9999.999888
 SELECT @Teste1, @Teste2
@@ -145,8 +145,8 @@ SELECT @Teste1, @Teste2
 GO
 
 /***************************************************************
- PROBLEMA FLOAT: Não é preciso para comparações, SQL Server armazena
- uma aproximação. 
+ PROBLEMA FLOAT: NÃ£o Ã© preciso para comparaÃ§Ãµes, SQL Server armazena
+ uma aproximaÃ§Ã£o. 
 
  Pode causar problemas para valores financeiros, use DECIMAL.
 ****************************************************************/

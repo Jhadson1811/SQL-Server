@@ -1,11 +1,11 @@
-/*****************************************************************************************************************************
+ï»¿/*****************************************************************************************************************************
  Autor: Jhadson Santos
  
- Assunto: Para executar consultas, o SQL Server deve analisar a instrução para determinar a melhor maneira de acessar os dados 
- necessários e processá-los. Para isso, o Otimizador de Consultas utiliza as estatísticas do banco de dados para definir um ou 
- mais planos de execução. 
+ Assunto: Para executar consultas, o SQL Server deve analisar a instruÃ§Ã£o para determinar a melhor maneira de acessar os dados 
+ necessÃ¡rios e processÃ¡-los. Para isso, o Otimizador de Consultas utiliza as estatÃ­sticas do banco de dados para definir um ou 
+ mais planos de execuÃ§Ã£o. 
 
- Objetivo: Demonstrar o impacto do uso do Histograma ao gerar o Plano de Execução.
+ Objetivo: Demonstrar o impacto do uso do Histograma ao gerar o Plano de ExecuÃ§Ã£o.
 
  Material de apoio: 
  https://learn.microsoft.com/pt-br/sql/relational-databases/statistics/statistics?view=sql-server-ver16
@@ -28,23 +28,23 @@ USE DB_Estatistica
 GO
 
 -- Aba Messages
-DBCC TRACEON(3604) -- Habilita saída em "Messages" (for message output to the console)
-DBCC TRACEON(8605) -- Mostra a árvore de otimização da consulta Otimizador (Displays logical and physical trees used during the optimization process)
+DBCC TRACEON(3604) -- Habilita saÃ­da em "Messages" (for message output to the console)
+DBCC TRACEON(8605) -- Mostra a Ã¡rvore de otimizaÃ§Ã£o da consulta Otimizador (Displays logical and physical trees used during the optimization process)
 DBCC TRACEON(8675) -- Habilita mostrar as fases do Otimizador (Displays the query optimization phases for a specific optimization)
 
 DBCC TRACEOFF(3604)
 DBCC TRACEOFF(8605)
 DBCC TRACEOFF(8675)
 
--- Verifica a ocorrência de consultas executadas com Trivial Plan
+-- Verifica a ocorrÃªncia de consultas executadas com Trivial Plan
 SELECT * 
   FROM sys.dm_exec_query_optimizer_info
  WHERE counter = 'trivial plan'
 
 -- Trivial Plan
--- Ative o plano de execução atual (CTRL + M) 
+-- Ative o plano de execuÃ§Ã£o atual (CTRL + M) 
 -- Properties Windows (f4)
--- Selecione o SELECT no plano de execução (Optimization Level = TRIVIAL)
+-- Selecione o SELECT no plano de execuÃ§Ã£o (Optimization Level = TRIVIAL)
 SELECT * 
   FROM AdventureWorks.Person.Person
 
@@ -105,7 +105,7 @@ SELECT *
  WHERE PersonType = 'M'
 
  /****************************************************
- Força o uso do índice nonclustered
+ ForÃ§a o uso do Ã­ndice nonclustered
  Table 'Person'. Scan count 1, logical reads 2002
 ****************************************************/
  SELECT * 
@@ -113,7 +113,7 @@ SELECT *
   WHERE PersonType = 'M'
 
 
--- Plano de Execução 1) FULL TABLE SCAN 
+-- Plano de ExecuÃ§Ã£o 1) FULL TABLE SCAN 
 
 SELECT rows as QtdLinhas, 
        data_pages Paginas8k 
@@ -124,7 +124,7 @@ SELECT rows as QtdLinhas,
 -- 19972		112
 
 
--- Plano de Execução 2) Index Seek + BookMark lookup 
+-- Plano de ExecuÃ§Ã£o 2) Index Seek + BookMark lookup 
 -- Table 'Person'. Scan count 1, logical reads 2002
 
 
@@ -147,15 +147,15 @@ UPDATE dbo.Person
  WHERE PersonType IN('F', 'M')
 
  /***********************************
- Atualizando Estatísticas
+ Atualizando EstatÃ­sticas
 ************************************/
--- Atualiza todas as estatísticas da tabela Person
+-- Atualiza todas as estatÃ­sticas da tabela Person
 UPDATE STATISTICS dbo.Person
 
--- Atualiza a estatística do índice IX_Person_PersonType na tabela Person com SAMPLE
+-- Atualiza a estatÃ­stica do Ã­ndice IX_Person_PersonType na tabela Person com SAMPLE
 UPDATE STATISTICS dbo.Person(IX_Person_PersonType) WITH SAMPLE 50 PERCENT
 
--- Atualiza a estatística do índice IX_Person_PersonType na tabela Person com FULLSCAN
+-- Atualiza a estatÃ­stica do Ã­ndice IX_Person_PersonType na tabela Person com FULLSCAN
 UPDATE STATISTICS dbo.Person(IX_Person_PersonType) WITH FULLSCAN
 
 DBCC SHOW_STATISTICS ("dbo.Person", IX_Person_PersonType)

@@ -1,11 +1,11 @@
-/*****************************************************************************************************************************
+ï»¿/*****************************************************************************************************************************
  Autor: Jhadson Santos
  
- Assunto: Para executar consultas, o SQL Server deve analisar a instrução para determinar a melhor maneira de acessar os dados 
- necessários e processá-los. Para isso, o Otimizador de Consultas utiliza as estatísticas do banco de dados para definir um ou 
- mais planos de execução. 
+ Assunto: Para executar consultas, o SQL Server deve analisar a instruÃ§Ã£o para determinar a melhor maneira de acessar os dados 
+ necessÃ¡rios e processÃ¡-los. Para isso, o Otimizador de Consultas utiliza as estatÃ­sticas do banco de dados para definir um ou 
+ mais planos de execuÃ§Ã£o. 
 
- Objetivo: Demonstrar as formas de uso do Plano de Execução.
+ Objetivo: Demonstrar as formas de uso do Plano de ExecuÃ§Ã£o.
 
  Material de apoio: 
  https://learn.microsoft.com/pt-br/sql/relational-databases/performance/execution-plans?view=sql-server-ver16
@@ -23,9 +23,9 @@ GO
 CREATE DATABASE DB_PlanExecute
 GO 
 
-/******************* Plano de Execução **********************/
+/******************* Plano de ExecuÃ§Ã£o **********************/
 
--- Formas de monstrar o Plano de Execução 
+-- Formas de monstrar o Plano de ExecuÃ§Ã£o 
 
 -- Texto
 SET STATISTICS IO ON
@@ -130,7 +130,7 @@ SELECT BusinessEntityID, PersonType, FirstName, LastName
   FROM dbo.Person
 --Table 'Person'. Scan count 1, logical reads 112
 
--- Tabela com Índice Clustered -> Clustered Index Scan = Table Scan
+-- Tabela com Ãndice Clustered -> Clustered Index Scan = Table Scan
 CREATE UNIQUE CLUSTERED INDEX IX_Person_BusinessEntityID ON dbo.Person (BusinessEntityID) 
 
 SELECT BusinessEntityID, PersonType, FirstName, LastName

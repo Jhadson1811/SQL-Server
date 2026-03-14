@@ -1,10 +1,10 @@
-/********************************************************
+Ôªø/********************************************************
  Autor: Jhadson Santos
  
-Assunto: O objetivo do script È apresentar o uso dos principais tipos de dados e funÁıes de data e hora no SQL Server.
+Assunto: O objetivo do script √© apresentar o uso dos principais tipos de dados e fun√ß√µes de data e hora no SQL Server.
 
 Tipos de dados: time, date, smalldatetime, datetime, datetime2, datetimeoffset
-FunÁıes: DATEADD, DATEDIFF, SET DATEFORMAT
+Fun√ß√µes: DATEADD, DATEDIFF, SET DATEFORMAT
 
 Material de apoio: 
  https://learn.microsoft.com/en-us/sql/t-sql/functions/date-and-time-data-types-and-functions-transact-sql?view=sql-server-ver16
@@ -85,7 +85,7 @@ DECLARE @DataHora_datetime2 datetime2
     SET @DataHora_datetime2 = '17520101' -- 0001-01-01 00:00:00.0000000 through 9999-12-31 23:59:59.9999999
  SELECT @DataHora_datetime2
 
--- Precis„o hora
+-- Precis√£o hora
 DECLARE @DataHora3 datetime2(3)
     SET @DataHora3 = '2026-02-19 21:43:00.1234567'
  SELECT [datetime2(3)] = @DataHora3
@@ -105,7 +105,7 @@ DECLARE @dt datetimeoffset(0)
     SET @dt1 = '2026-02-19 21:45:00 +8:00'  --Australia -- 0001-01-01 00:00:00.0000000 through 9999-12-31 23:59:59.9999999 (in UTC)
  SELECT @dt1
 
-SELECT @dt,@dt1,DATEDIFF(hh,@dt,@Dt1) 'DiferenÁa Fuso Brasilia e Australia -11'
+SELECT @dt,@dt1,DATEDIFF(hh,@dt,@Dt1) 'Diferen√ßa Fuso Brasilia e Australia -11'
 
 /*********************************************************
  DATEADD (<datepart>, <number>, <date> )
@@ -135,7 +135,7 @@ SELECT datediff(day,@Data_Cadastro,@Data_Inativacao) as Dif_Dias,
 *********************************************************/
 
 
-       -- Padr„o mdy
+       -- Padr√£o mdy
 DECLARE @Mes13 date = '13/12/2018'
  SELECT @Mes13
 /*
@@ -164,7 +164,7 @@ DECLARE @ANSI_Padrao date = '20231218' -- ANSI sempre funciona ymd
 SELECT @ANSI_Padrao
 go
 
--- Retorna para o padr„o
+-- Retorna para o padr√£o
 SET DATEFORMAT mdy
 
 -- Exclui Banco

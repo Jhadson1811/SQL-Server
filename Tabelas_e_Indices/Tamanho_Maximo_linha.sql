@@ -1,12 +1,12 @@
-/*************************************************************************************************************************************
+Ôªø/*************************************************************************************************************************************
  Autor: Jhadson Santos
  
-Assunto: O SQL Server possui limite de 8060 bytes para linhas em tabelas com campos fixos. No entanto, È permitido exceder esse limite 
-para campos vari·veis.O SQL Server, permite o estouro de linha, quando o valor de 8060 bytes È ultrapassado, o SQL Server Database Engine 
-move a coluna de registro com a maior largura para outra p·gina na unidade de alocaÁ„o ROW_OVERFLOW_DATA, mantendo um ponteiro de 24 bytes 
-na p·gina original.
+Assunto: O SQL Server possui limite de 8060 bytes para linhas em tabelas com campos fixos. No entanto, √© permitido exceder esse limite 
+para campos vari√°veis.O SQL Server, permite o estouro de linha, quando o valor de 8060 bytes √© ultrapassado, o SQL Server Database Engine 
+move a coluna de registro com a maior largura para outra p√°gina na unidade de aloca√ß√£o ROW_OVERFLOW_DATA, mantendo um ponteiro de 24 bytes 
+na p√°gina original.
 
-Objetivo: Demonstrar a restriÁ„o de 8060 bytes para linha em uma tabela com campos fixos, e exemplificar o estouro de linha para registros 
+Objetivo: Demonstrar a restri√ß√£o de 8060 bytes para linha em uma tabela com campos fixos, e exemplificar o estouro de linha para registros 
 que ultrapassam a quantidade de 8060 bytes. 
 
 Material de apoio: 
@@ -59,7 +59,7 @@ Completion time: 2026-02-23T20:35:25.3676047-03:00
 
 /*****************************************************************
  Tabela com tamanho de linha superior a 8060 bytes e com colunas 
- de tamanho vari·vel 
+ de tamanho vari√°vel 
 *****************************************************************/
 
 DROP TABLE IF EXISTS dbo.Teste_Variavel 

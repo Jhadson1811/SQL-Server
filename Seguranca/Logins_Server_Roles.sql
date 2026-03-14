@@ -1,4 +1,4 @@
-/********************************************************
+﻿/********************************************************
  Autor: Jhadson Santos
  
 Assunto: Gerenciamento de Logins e Server Roles
@@ -41,7 +41,7 @@ GO
 
 /************** Gerenciamento de Roles ********************/
 
--- Verifica as permiss�es atuais do Login 
+-- Verifica as permissões atuais do Login 
 EXECUTE AS LOGIN = 'App_Login2'
 SELECT * 
   FROM sys.fn_my_permissions (null, 'SERVER') 

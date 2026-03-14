@@ -1,4 +1,4 @@
-/**********************************************
+ï»¿/**********************************************
  Autor: Jhadson Santos
 
  Simulando Shrink
@@ -59,7 +59,7 @@ DB_TesteLog		648.000000	592.062500			91.367669753086400
 DB_TesteLog_log	392.000000	240.484375			61.348054846938700
 */
 
--- Reduzindo o espaço, mas mantém 10% de espaço livre
+-- Reduzindo o espaÃ§o, mas mantÃ©m 10% de espaÃ§o livre
 DBCC SHRINKDATABASE('DB_Shrink', 10)
 
 SELECT name AS Name, size * 8 /1024. as Tamanho_MB,  

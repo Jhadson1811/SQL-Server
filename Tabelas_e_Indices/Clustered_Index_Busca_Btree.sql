@@ -1,7 +1,7 @@
-/********************************************************
+Ôªø/********************************************************
  Autor: Jhadson Santos
  
- Assunto: O objetivo do script È percorrer as p·ginas do Ìndice clustered, simulando a navegaÁ„o 
+ Assunto: O objetivo do script √© percorrer as p√°ginas do √≠ndice clustered, simulando a navega√ß√£o 
  Root Page -> Intermediate Level -> Leaf Level (Data Page)
 
  Material de apoio: 
@@ -52,9 +52,9 @@ CREATE TABLE [DB_IndiceClustered].[dbo].[Customer](
  SET STATISTICS IO OFF
  --logical reads 2
 
--- Verifica a profundidade do Ìndice
+-- Verifica a profundidade do √≠ndice
 /* 
-	1 ? sÛ leaf
+	1 ? s√≥ leaf
 	2 ? root + leaf
 	3 ? root + intermediate + leaf
 */ 
@@ -96,7 +96,7 @@ INSERT INTO #IND
 EXEC ('DBCC IND (''DB_IndiceClustered'', ''Customer'', 1)');
 
 
--- Encontre a p·gina com o maior IndexLevel = ROOT
+-- Encontre a p√°gina com o maior IndexLevel = ROOT
 SELECT *
   FROM #IND
  WHERE IndexLevel = (SELECT MAX(IndexLevel) FROM #IND);
@@ -133,8 +133,8 @@ Record Type = PRIMARY_RECORD        Record Attributes =  NULL_BITMAP VARIABLE_CO
 Record Size = 63                    
 Memory Dump @0x00000035441F8EE5
 
-0000000000000000:   30002c00 4c1d0000 bb350000 4c030000 0a000000  0.,.L...ª5..L.......
-0000000000000014:   cd248968 037aba42 97d43d5c 9ada32a3 736db900  Õ$?h.z∫B?‘=\?⁄2£smπ.
+0000000000000000:   30002c00 4c1d0000 bb350000 4c030000 0a000000  0.,.L...¬ª5..L.......
+0000000000000014:   cd248968 037aba42 97d43d5c 9ada32a3 736db900  √ç$?h.z¬∫B?√î=\?√ö2¬£sm¬π.
 0000000000000028:   349b0000 08000802 0035003f 00415730 30303137  4?.......5.?.AW00017
 000000000000003C:   373938                                        798    
 

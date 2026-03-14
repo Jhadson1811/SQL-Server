@@ -1,10 +1,10 @@
-/********************************************************
+Ôªø/********************************************************
  Autor: Jhadson Santos
  
-Assunto: O objetivo do script È corromper um banco de dados e, em seguida, recuper·-lo por meio do DBCC CHECKDB. 
-Para isso, alteramos a estrutura fÌsica de uma p·gina de dados (data page), provocando uma inconsistÍncia. 
-Posteriormente, simulamos dois cen·rios: a recuperaÁ„o com perda de dados (REPAIR_ALLOW_DATA_LOSS) e a recuperaÁ„o sem perda de dados, 
-aplic·vel a casos de corrupÁ„o em p·ginas de Ìndice.
+Assunto: O objetivo do script √© corromper um banco de dados e, em seguida, recuper√°-lo por meio do DBCC CHECKDB. 
+Para isso, alteramos a estrutura f√≠sica de uma p√°gina de dados (data page), provocando uma inconsist√™ncia. 
+Posteriormente, simulamos dois cen√°rios: a recupera√ß√£o com perda de dados (REPAIR_ALLOW_DATA_LOSS) e a recupera√ß√£o sem perda de dados, 
+aplic√°vel a casos de corrup√ß√£o em p√°ginas de √≠ndice.
 
 Material de apoio: 
  https://learn.microsoft.com/pt-br/sql/t-sql/database-console-commands/dbcc-checkdb-transact-sql?view=sql-server-ver16
@@ -55,7 +55,7 @@ BACKUP DATABASE DB_CHECKDB TO DISK = 'C:\BKP\DB_CHECKDB.bak' WITH format, compre
 BACKUP LOG DB_CHECKDB TO DISK = 'C:\BKP\DB_CHECKDB.trn' WITH format, compression 
 
 /********************************************************
-DBCC IND - Lista as p·ginas de um objeto no banco de dados
+DBCC IND - Lista as p√°ginas de um objeto no banco de dados
 1  - Data Page
 2  - Index Page
 10 - IAM Page
@@ -74,15 +74,15 @@ DBCC TRACEON (3604) -- Habilita o uso do DBCC PAGE
 DBCC PAGE(DB_CHECKDB, 1, 240, 3) --WITH NO_INFOMSGS, TABLERESULTS 
 
 /********************************************************
-DBCC PAGE - Usado para examinar o conte˙do das p·ginas 
+DBCC PAGE - Usado para examinar o conte√∫do das p√°ginas 
 https://techcommunity.microsoft.com/blog/sqlserver/how-to-use-dbcc-page/383094
 dbcc PAGE ( {'dbname' | dbid}, filenum, pagenum [, printopt={0|1|2|3} ])
 ********************************************************/
 
 /********************************************************
 NUNCA EXECUTE O COMANDO ABAIXO EM AMBIENTE DE PRODUCAO 
-N„o gera escrita no Transaction Log
-N„o tem ROLLBACK
+N√£o gera escrita no Transaction Log
+N√£o tem ROLLBACK
 ********************************************************/
 DBCC HELP ('WRITEPAGE')
 
@@ -99,12 +99,12 @@ SELECT * FROM msdb..suspect_pages
 -- Verifica a integridade
 DBCC CHECKDB (DB_CHECKDB) WITH NO_INFOMSGS ,TABLERESULTS
 
--- Corrige a inconsistÍncia
+-- Corrige a inconsist√™ncia
 ALTER DATABASE DB_CHECKDB SET SINGLE_USER WITH ROLLBACK IMMEDIATE
 DBCC CHECKDB (DB_CHECKDB,REPAIR_ALLOW_DATA_LOSS)
 ALTER DATABASE DB_CHECKDB SET  MULTI_USER WITH NO_WAIT
 
--- Registros perdido apÛs corrigir a inconsistÍncia
+-- Registros perdido ap√≥s corrigir a inconsist√™ncia
 SELECT * FROM DB_CHECKDB.dbo.Tb_Clientes
 
 /*************** Corrompendo Indice ******************/
@@ -121,7 +121,7 @@ ALTER DATABASE DB_CHECKDB SET SINGLE_USER WITH ROLLBACK IMMEDIATE
 DBCC CHECKDB (DB_CHECKDB,REPAIR_ALLOW_DATA_LOSS)
 ALTER DATABASE DB_CHECKDB SET  MULTI_USER WITH NO_WAIT
 
--- Sem perda de dados para p·ginas de Ìndices 
+-- Sem perda de dados para p√°ginas de √≠ndices 
 SELECT * FROM DB_CHECKDB.dbo.Tb_Clientes
 
 -- Exclui banco

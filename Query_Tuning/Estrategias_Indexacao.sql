@@ -1,11 +1,11 @@
-/*****************************************************************************************************************************
+ï»¿/*****************************************************************************************************************************
  Autor: Jhadson Santos
 
- Assunto: O Covering Index é uma estratégia de indexação, consiste em criar uma cobertura total dos campos solicitados na query. 
- Dessa forma, não ocorre acesso DataPage (Table) e nem operações de Bookmark lookup. Consequentemente, redução de logical reads, 
+ Assunto: O Covering Index Ã© uma estratÃ©gia de indexaÃ§Ã£o, consiste em criar uma cobertura total dos campos solicitados na query. 
+ Dessa forma, nÃ£o ocorre acesso DataPage (Table) e nem operaÃ§Ãµes de Bookmark lookup. Consequentemente, reduÃ§Ã£o de logical reads, 
  uso de CPU e tempo de resposta. 
  
- Objetivo: Demonstrar estratégias de Covering Index e a criação de índices para os operadores AND e OR. 
+ Objetivo: Demonstrar estratÃ©gias de Covering Index e a criaÃ§Ã£o de Ã­ndices para os operadores AND e OR. 
 
 ******************************************************************************************************************************/
 
@@ -30,7 +30,7 @@ Quantity, ActualCost, ModifiedDate
   INTO dbo.TransactionHistory
   FROM AdventureWorks.Production.TransactionHistory
 
--- IX_TransactionHistory_ReferenceOrderID indice não cobre a consulta 
+-- IX_TransactionHistory_ReferenceOrderID indice nÃ£o cobre a consulta 
  CREATE INDEX IX_TransactionHistory_ReferenceOrderID ON dbo.TransactionHistory(ReferenceOrderID) 
 
  SET STATISTICS IO ON 
@@ -43,7 +43,7 @@ Quantity, ActualCost, ModifiedDate
 -- Index Seek + RID Lookup Table 'TransactionHistory'. Scan count 7, logical reads 29198
 
 /*************************************************************
-     Recriando o índice com a estratégia Covering Index
+     Recriando o Ã­ndice com a estratÃ©gia Covering Index
 **************************************************************/
 
  CREATE INDEX IX_TransactionHistory_ReferenceOrderID ON dbo.transactionHistory(ReferenceOrderID)
@@ -60,8 +60,8 @@ Quantity, ActualCost, ModifiedDate
 DROP INDEX dbo.transactionHistory.IX_TransactionHistory_ReferenceOrderID
 
 /*************************************************************
-     Estratégia de Indexação para o operador AND
-     Indicado definir o índice na cláusula mais seletiva
+     EstratÃ©gia de IndexaÃ§Ã£o para o operador AND
+     Indicado definir o Ã­ndice na clÃ¡usula mais seletiva
 **************************************************************/
 
 CREATE INDEX IX_TransactionHistory_ReferenceOrderID ON dbo.transactionHistory(ReferenceOrderID) 
@@ -75,7 +75,7 @@ SELECT * FROM dbo.TransactionHistory where ProductID = 800
 SELECT * FROM dbo.TransactionHistory where ReferenceOrderID = 57593
 --Table 'TransactionHistory'. Scan count 1, logical reads 6
 
--- O otimizador vai escolher o índice mais seletivo 
+-- O otimizador vai escolher o Ã­ndice mais seletivo 
 SELECT ReferenceOrderID, 
        ProductID, 
        TransactionDate, 
@@ -83,9 +83,9 @@ SELECT ReferenceOrderID,
   FROM dbo.TransactionHistory WITH(INDEX(IX_TransactionHistory_ProductID))
  WHERE ProductID = 800 AND ReferenceOrderID = 57593
 -- Index Seek: Table 'TransactionHistory'. Scan count 1, logical reads 3
--- Utilizou o índice IX_TransactionHistory_ReferenceOrderID
+-- Utilizou o Ã­ndice IX_TransactionHistory_ReferenceOrderID
 
--- Ao forçar o uso do índice IX_TransactionHistory_ProductID
+-- Ao forÃ§ar o uso do Ã­ndice IX_TransactionHistory_ProductID
 -- Table 'TransactionHistory'. Scan count 1, logical reads 5
 
 DROP INDEX dbo.TransactionHistory.IX_TransactionHistory_ReferenceOrderID
@@ -93,15 +93,15 @@ DROP INDEX dbo.TransactionHistory.IX_TransactionHistory_ProductID
 
 
 /*************************************************************
-  Estratégia de Indexação para o operador OR
-  Indicado definir um índice para cada cláusula, se não faz Scan
+  EstratÃ©gia de IndexaÃ§Ã£o para o operador OR
+  Indicado definir um Ã­ndice para cada clÃ¡usula, se nÃ£o faz Scan
 **************************************************************/
 
--- Estratégia Indexação para OR
+-- EstratÃ©gia IndexaÃ§Ã£o para OR
 CREATE INDEX IX_TransactionHistory_ReferenceOrderID ON dbo.transactionHistory(ReferenceOrderID) 
 INCLUDE (ProductID, TransactionDate, ActualCost)
 
--- Estratégia Indexação para OR
+-- EstratÃ©gia IndexaÃ§Ã£o para OR
 CREATE INDEX IX_TransactionHistory_ProductID ON dbo.transactionHistory(ProductID) 
 INCLUDE (ReferenceOrderID, TransactionDate, ActualCost)
 
@@ -112,13 +112,13 @@ SELECT ReferenceOrderID,
   FROM dbo.TransactionHistory WITH(INDEX(IX_TransactionHistory_ReferenceOrderID))
  WHERE ProductID = 800 OR ReferenceOrderID = 57593
 
- -- Indíce selecionado pelo Otimizador = IX_TransactionHistory_ProductID
+ -- IndÃ­ce selecionado pelo Otimizador = IX_TransactionHistory_ProductID
  -- Index Seek -> Table 'TransactionHistory'. Scan count 2, logical reads 8
  
- -- Sem índice  
+ -- Sem Ã­ndice  
  -- Table Scan -> Table 'TransactionHistory'. Scan count 1, logical reads 790
 
- -- Forcando o usdo do índice IX_TransactionHistory_ReferenceOrderID
+ -- Forcando o usdo do Ã­ndice IX_TransactionHistory_ReferenceOrderID
  -- Index Scan -> Table 'TransactionHistory'. Scan count 1, logical reads 539
 
  -- Exclui Banco 

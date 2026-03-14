@@ -1,7 +1,7 @@
-/********************************************************
+Ôªø/********************************************************
  Autor: Jhadson Santos
  
- Assunto: ConfiguraÁ„o de Backup usando Criptografia
+ Assunto: Configura√ß√£o de Backup usando Criptografia
  Material de apoio: 
  https://learn.microsoft.com/en-us/sql/relational-databases/backup-restore/backup-encryption?view=sql-server-ver17
 *********************************************************/
@@ -52,7 +52,7 @@ MOVE 'AdventureWorks2012_Log' TO 'C:\MSSQL_Data\AdventureWorks_Encrypt_log.ldf'
 
 
 /********************************************
- Tentativa de Restore em uma Inst‚ncia sem o certificado
+ Tentativa de Restore em uma Inst√¢ncia sem o certificado
 
  If you're restoring the encrypted backup to a different instance, you must make sure that the certificate is available on that instance.
 *********************************************/
@@ -71,7 +71,7 @@ RESTORE DATABASE is terminating abnormally.
 
 
 /********************************************
-  Restore do Certificado em Outra Inst‚ncia
+  Restore do Certificado em Outra Inst√¢ncia
 *********************************************/
 
 CREATE MASTER KEY ENCRYPTION BY PASSWORD= '<P4ssW0rd>'

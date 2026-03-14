@@ -1,7 +1,7 @@
-/********************************************************
+Ôªø/********************************************************
  Autor: Jhadson Santos
  
- Assunto: ConfiguraÁ„o de Backup e Restore
+ Assunto: Configura√ß√£o de Backup e Restore
  Material de apoio: 
  https://learn.microsoft.com/en-us/sql/t-sql/statements/backup-transact-sql?view=sql-server-ver16
  https://learn.microsoft.com/en-us/sql/relational-databases/system-stored-procedures/sp-addumpdevice-transact-sql?view=sql-server-ver17
@@ -41,7 +41,7 @@ BACKUP DATABASE master TO BackupMaster
 BACKUP DATABASE master TO DISK = 'C:\BKP\BackupMaster.bak'
 
 /********************************************************
-    Habilita a compress„o do Backup na Inst‚ncia 
+    Habilita a compress√£o do Backup na Inst√¢ncia 
 ********************************************************/
 
 EXEC sp_configure 'show advanced options', 1
@@ -108,7 +108,7 @@ GO
 
 
 /********************************************************
- GERANDO FALHA: Pare o serviÁo do SQL Server e altere o 
+ GERANDO FALHA: Pare o servi√ßo do SQL Server e altere o 
  nome do arquivo de dados
 ********************************************************/
 

@@ -1,11 +1,11 @@
-/***********************************************************
+ï»¿/***********************************************************
 
 Autor: Jhadson Santos 
 
 Assunto: Simulando problema de Hard Page Fault - SQL Server
 
-Objetivo: esgotar a memória disponível, fazer o Windows usar 
-a paginação para disco. 
+Objetivo: esgotar a memÃ³ria disponÃ­vel, fazer o Windows usar 
+a paginaÃ§Ã£o para disco. 
 
 ***********************************************************/
 

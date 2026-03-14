@@ -1,12 +1,12 @@
-/*************************************************************************************************************************************
+Ôªø/*************************************************************************************************************************************
  Autor: Jhadson Santos
  
-Assunto: O SQL Server possui alguns bancos de sistema, o objetivo do script È simular a recuperaÁ„o do Banco TempDB, Um workspace para 
-manter conjuntos de resultados tempor·rios ou intermedi·rios. Esse banco de dados È recriado sempre que uma inst‚ncia do SQL Server È 
-iniciada. Portanto, ele n„o È recuperado por Backup. 
+Assunto: O SQL Server possui alguns bancos de sistema, o objetivo do script √© simular a recupera√ß√£o do Banco TempDB, Um workspace para 
+manter conjuntos de resultados tempor√°rios ou intermedi√°rios. Esse banco de dados √© recriado sempre que uma inst√¢ncia do SQL Server √© 
+iniciada. Portanto, ele n√£o √© recuperado por Backup. 
 
-Problema: Caminho inv·lido ou disco indisponÌvel, o serviÁo do SQL Server n„o inicializa nestes cen·rios. … preciso acessar o SQL Server
-com o modo SINGLE USER para inserir um novo caminho de inicializaÁ„o do TempDB. 
+Problema: Caminho inv√°lido ou disco indispon√≠vel, o servi√ßo do SQL Server n√£o inicializa nestes cen√°rios. √â preciso acessar o SQL Server
+com o modo SINGLE USER para inserir um novo caminho de inicializa√ß√£o do TempDB. 
 
 Material de apoio: 
  https://learn.microsoft.com/pt-br/sql/relational-databases/backup-restore/back-up-and-restore-of-system-databases-sql-server?view=sql-server-ver17
@@ -16,9 +16,9 @@ USE tempdb
 GO 
 
 CREATE TABLE temporaria (collumn varchar(10))
--- Reinicie o serviÁo do SQL Server para conferir o banco TEMPDB recriado. 
+-- Reinicie o servi√ßo do SQL Server para conferir o banco TEMPDB recriado. 
 
---Movendo os arquivos do Banco TempDB para outro diretÛrio
+--Movendo os arquivos do Banco TempDB para outro diret√≥rio
 EXEC sp_helpdb tempdb
 
 ALTER DATABASE tempdb MODIFY FILE (name = 'tempdev', filename = 'C:\MSSQL_TEMPDB\tempdb.mdf')
@@ -29,10 +29,10 @@ ALTER DATABASE tempdb MODIFY FILE (name = 'temp5', filename = 'C:\MSSQL_TEMPDB\t
 ALTER DATABASE tempdb MODIFY FILE (name = 'temp6', filename = 'C:\MSSQL_TEMPDB\tempdb_mssql_6.ndf')
 ALTER DATABASE tempdb MODIFY FILE (name = 'templog', filename = 'C:\MSSQL_TEMPDB\templog.ldf')
 
--- Renomear a pasta MSSQL_TEMPDB e mostrar o erro na inicializaÁ„o
--- Iniciar o SQL Server com -f -m e alterar a localizaÁ„o da TEMPDB
+-- Renomear a pasta MSSQL_TEMPDB e mostrar o erro na inicializa√ß√£o
+-- Iniciar o SQL Server com -f -m e alterar a localiza√ß√£o da TEMPDB
 
-/*************** Retorna para o diretÛrio de origem ****************/
+/*************** Retorna para o diret√≥rio de origem ****************/
 ALTER DATABASE tempdb MODIFY FILE (name = 'tempdev', filename = 'C:\Microsoft SQL Server\MSSQL17.MSSQLSERVER\MSSQL\DATA\tempdb.mdf')
 ALTER DATABASE tempdb MODIFY FILE (name = 'temp2', filename = 'C:\Microsoft SQL Server\MSSQL17.MSSQLSERVER\MSSQL\DATA\tempdb_mssql_2.ndf')
 ALTER DATABASE tempdb MODIFY FILE (name = 'temp3', filename = 'C:\Microsoft SQL Server\MSSQL17.MSSQLSERVER\MSSQL\DATA\tempdb_mssql_3.ndf')

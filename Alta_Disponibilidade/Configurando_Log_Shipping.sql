@@ -1,8 +1,8 @@
-/********************************************************
+Ôªø/********************************************************
  Autor: Jhadson Santos
  
-Assunto: O objetivo do script È configurar a soluÁ„o de alta disponibilidade Log Shipping do SQL Server, este tipo 
-de soluÁ„o permite manter bases secund·rias sincronizadas com uma base prim·ria, por meio do envio autom·tico dos 
+Assunto: O objetivo do script √© configurar a solu√ß√£o de alta disponibilidade Log Shipping do SQL Server, este tipo 
+de solu√ß√£o permite manter bases secund√°rias sincronizadas com uma base prim√°ria, por meio do envio autom√°tico dos 
 backups do transaction log. 
 
 
@@ -56,15 +56,15 @@ SELECT * FROM DB_LogShipping.dbo.TB_Clientes
 GO 
 
 /********************************************************
- *********** ConfiguraÁ„o do Log Shipping ***************
+ *********** Configura√ß√£o do Log Shipping ***************
 
   1. Configurar o banco de dados com Recovery Model FULL
   2. Criar pasta compartilhada entre os servidores
-  3. Permiss„o Read/Write na pasta compartilhada para a 
-	 conta de serviÁo do SQL Server Agent
-  4. Fazer o Backup FULL do banco no Servidor prim·rio
-  5. Copiar e Restaurar o Backup FULL no Servidor secund·rio, 
-     utlizando a cl·usula NORECOVERY
+  3. Permiss√£o Read/Write na pasta compartilhada para a 
+	 conta de servi√ßo do SQL Server Agent
+  4. Fazer o Backup FULL do banco no Servidor prim√°rio
+  5. Copiar e Restaurar o Backup FULL no Servidor secund√°rio, 
+     utlizando a cl√°usula NORECOVERY
   6. Habilitar o Log Shipping na propriedades do banco de 
      dados.
 ********************************************************/
@@ -90,13 +90,13 @@ ALTER DATABASE DB_LogShipping SET RECOVERY FULL
    - Destino -> \\192.168.1.10\LogShipping
 *********************************************************/
 
--- 3. Permiss„o Read/Write na pasta compartilhada para a conta de serviÁo do SQL Server Agent
+-- 3. Permiss√£o Read/Write na pasta compartilhada para a conta de servi√ßo do SQL Server Agent
 
--- 4. Fazer o Backup FULL do banco no Servidor prim·rio
+-- 4. Fazer o Backup FULL do banco no Servidor prim√°rio
 BACKUP DATABASE DB_LogShipping TO DISK = '\\192.168.1.10\LogShipping\Sinc\DB_LogShipping.bak'
 WITH FORMAT, COMPRESSION, STATS=5
 
--- 5. Copiar e Restaurar o Backup FULL no Servidor secund·rio, utlizando a cl·usula NORECOVERY
+-- 5. Copiar e Restaurar o Backup FULL no Servidor secund√°rio, utlizando a cl√°usula NORECOVERY
 RESTORE DATABASE DB_LogShipping FROM DISK = 'C:\LogShipping\Sinc\DB_LogShipping.bak'
 WITH norecovery, replace,
 MOVE 'DB_LogShipping' TO 'C:\MSSQL_\DB_LogShipping.mdf',

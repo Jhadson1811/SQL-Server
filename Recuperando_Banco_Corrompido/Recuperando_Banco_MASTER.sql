@@ -1,22 +1,22 @@
-/*************************************************************************************************************************************
+Ôªø/*************************************************************************************************************************************
  Autor: Jhadson Santos
  
-Assunto: O SQL Server possui alguns bancos de sistema, o objetivo do script È simular a recuperaÁ„o do Banco Master, o banco de dados que 
-registra todas as informaÁıes de nÌvel de sistema para um sistema SQL Server.
+Assunto: O SQL Server possui alguns bancos de sistema, o objetivo do script √© simular a recupera√ß√£o do Banco Master, o banco de dados que 
+registra todas as informa√ß√µes de n√≠vel de sistema para um sistema SQL Server.
 
-Dois cen·rios: 
+Dois cen√°rios: 
  1. O SQL Server inicializa. 
-	Restaure o Backup da Master com a inst‚ncia em modo monousu·rio.
- 2. O SQL Server n„o inicializa. 
+	Restaure o Backup da Master com a inst√¢ncia em modo monousu√°rio.
+ 2. O SQL Server n√£o inicializa. 
 	Realize o REBUILD dos Bancos de Sistema
-	Restaure o Backup da Master com a inst‚ncia em modo monousu·rio.
+	Restaure o Backup da Master com a inst√¢ncia em modo monousu√°rio.
 
- Por que È importante ter backups regulares do Banco Master? O Banco armazena todas as informaÁıes a nÌvel de sistema do SQL Server. Exemplos: 
-	1. ConfiguraÁıes da inst‚ncia
+ Por que √© importante ter backups regulares do Banco Master? O Banco armazena todas as informa√ß√µes a n√≠vel de sistema do SQL Server. Exemplos: 
+	1. Configura√ß√µes da inst√¢ncia
 	2. Lista de banco de dados
 	3. Logins e seus SID
-	4. ConfiguraÁıes de servidor e endereÁos de arquivos
-	5. ReferÍncias de jobs, linked servers, configuraÁıes de seguranÁa. 
+	4. Configura√ß√µes de servidor e endere√ßos de arquivos
+	5. Refer√™ncias de jobs, linked servers, configura√ß√µes de seguran√ßa. 
 
 Material de apoio: 
  https://learn.microsoft.com/pt-br/sql/relational-databases/backup-restore/back-up-and-restore-of-system-databases-sql-server?view=sql-server-ver17
@@ -52,24 +52,24 @@ Msg 3013, Level 16, State 1, Line 46
 BACKUP DATABASE is terminating abnormally.
 */
 
-/**************** 1∞ Cen·rio de RecuperaÁ„o ******************/
+/**************** 1¬∞ Cen√°rio de Recupera√ß√£o ******************/
 /************************************************************
 1. O SQL Server inicializa. 
-   Restaure o Backup da Master com a inst‚ncia em modo monousu·rio.
+   Restaure o Backup da Master com a inst√¢ncia em modo monousu√°rio.
 
-Inicie uma inst‚ncia de servidor no modo de usu·rio ˙nico.
- Iniciar a inst‚ncia com os par‚metros de inicialiazaÁ„o -f e -m 
- -f = Inicia uma inst‚ncia do SQL Server com configuraÁ„o mÌnima.
- -m = Inicia uma inst‚ncia do SQL Server em modo de usu·rio ˙nico.
+Inicie uma inst√¢ncia de servidor no modo de usu√°rio √∫nico.
+ Iniciar a inst√¢ncia com os par√¢metros de inicialiaza√ß√£o -f e -m 
+ -f = Inicia uma inst√¢ncia do SQL Server com configura√ß√£o m√≠nima.
+ -m = Inicia uma inst√¢ncia do SQL Server em modo de usu√°rio √∫nico.
 
  Ou 
 
 cd C:\Program Files\Microsoft SQL Server\MSSQLXX.instance\MSSQL\Binn
 sqlservr -c -f -s <instance> -mSQLCMD
-  O -mSQLCMD par‚metro garante que somente o sqlcmd possa se conectar ao SQL Server.
-  Para um nome de inst‚ncia padr„o, use -s MSSQLSERVER
+  O -mSQLCMD par√¢metro garante que somente o sqlcmd possa se conectar ao SQL Server.
+  Para um nome de inst√¢ncia padr√£o, use -s MSSQLSERVER
   -c inicia o SQL Server como um aplicativo para ignorar o Gerenciador 
-   de Controle de ServiÁo a fim de reduzir o tempo de inicializaÁ„o
+   de Controle de Servi√ßo a fim de reduzir o tempo de inicializa√ß√£o
 
 *************************************************************/
 
@@ -86,14 +86,14 @@ The master database has been successfully restored. Shutting down SQL Server.
 SQL Server is terminating this process.
 */
 
---Remove os parametros de inicialiazaÁ„o no SQL Configuration
---Inicialize o serviÁo da Inst‚ncia no SQL Configuration
+--Remove os parametros de inicialiaza√ß√£o no SQL Configuration
+--Inicialize o servi√ßo da Inst√¢ncia no SQL Configuration
 
-/**************** 2∞ Cen·rio de RecuperaÁ„o ******************/
+/**************** 2¬∞ Cen√°rio de Recupera√ß√£o ******************/
 /************************************************************
-2. O SQL Server n„o inicializa. 
+2. O SQL Server n√£o inicializa. 
 	Realize o REBUILD dos Bancos de Sistema
-	Restaure o Backup da Master com a inst‚ncia em modo monousu·rio.
+	Restaure o Backup da Master com a inst√¢ncia em modo monousu√°rio.
 
  Rebuild
  cd C:\Program Files\Microsoft SQL Server\170\Setup Bootstrap\SQL2025

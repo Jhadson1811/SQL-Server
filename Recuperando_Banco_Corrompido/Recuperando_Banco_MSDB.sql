@@ -1,9 +1,9 @@
-/*************************************************************************************************************************************
+ï»¿/*************************************************************************************************************************************
  Autor: Jhadson Santos
  
-Assunto: O SQL Server possui alguns bancos de sistema, o objetivo do script é simular a recuperação do Banco MSDB, o banco de dados usado 
-pelo SQL Server Agent para agendar alertas e trabalhos e para registrar operadores. O msdb também contém tabelas de histórico, como as 
-tabelas de histórico de backup e de restauração.
+Assunto: O SQL Server possui alguns bancos de sistema, o objetivo do script Ã© simular a recuperaÃ§Ã£o do Banco MSDB, o banco de dados usado 
+pelo SQL Server Agent para agendar alertas e trabalhos e para registrar operadores. O msdb tambÃ©m contÃ©m tabelas de histÃ³rico, como as 
+tabelas de histÃ³rico de backup e de restauraÃ§Ã£o.
 
 Material de apoio: 
  https://learn.microsoft.com/pt-br/sql/relational-databases/backup-restore/back-up-and-restore-of-system-databases-sql-server?view=sql-server-ver17
@@ -25,7 +25,7 @@ BACKUP DATABASE msdb TO DISK = 'C:\BKP\msdb.dif' WITH FORMAT, COMPRESSION, DIFFE
 
 BACKUP LOG msdb TO DISK = 'C:\BKP\msdb.trn' WITH FORMAT, COMPRESSION
 
--- Modelo de recuperação: Simples
+-- Modelo de recuperaÃ§Ã£o: Simples
 
 /*
 Msg 4208, Level 16, State 1, Line 26
@@ -45,7 +45,7 @@ Msg 3013, Level 16, State 1, Line 39
 RESTORE DATABASE is terminating abnormally.
 */
 
--- Pare o Serviço do SQL Agent para efetuar o RESTORE do MSDB
+-- Pare o ServiÃ§o do SQL Agent para efetuar o RESTORE do MSDB
 
 RESTORE DATABASE msdb FROM DISK = 'C:\BKP\msdb.bak' WITH NORECOVERY, REPLACE 
 RESTORE DATABASE msdb FROM DISK = 'C:\BKP\msdb.dif' WITH RECOVERY, REPLACE

@@ -1,10 +1,10 @@
-/*************************************************************************************************************************************
+Ôªø/*************************************************************************************************************************************
  Autor: Jhadson Santos
  
-Assunto: O SQL Server possui alguns bancos de sistema, o objetivo do script È simular a recuperaÁ„o do Banco MODEL, O modelo para todos 
-os bancos de dados criados na inst‚ncia do SQL Server.
+Assunto: O SQL Server possui alguns bancos de sistema, o objetivo do script √© simular a recupera√ß√£o do Banco MODEL, O modelo para todos 
+os bancos de dados criados na inst√¢ncia do SQL Server.
 
-Problema: Se banco Modelo corromper, n„o È possÌvel criar o Banco TempDB ao reiniciar a inst‚ncia do SQL Server
+Problema: Se banco Modelo corromper, n√£o √© poss√≠vel criar o Banco TempDB ao reiniciar a inst√¢ncia do SQL Server
 
 Material de apoio: 
  https://learn.microsoft.com/pt-br/sql/relational-databases/backup-restore/back-up-and-restore-of-system-databases-sql-server?view=sql-server-ver17
@@ -13,8 +13,8 @@ Material de apoio:
 USE master 
 GO 
 
--- Inicialize o SQL Server com o parametro de inicializaÁ„o -t3608
--- TRACE FLAG 3608 permite inicializar a inst‚ncia sem o TEMPDB
+-- Inicialize o SQL Server com o parametro de inicializa√ß√£o -t3608
+-- TRACE FLAG 3608 permite inicializar a inst√¢ncia sem o TEMPDB
 /*****************************************************************
 TRACE FLAG 3608: Function: Prevents SQL Server from automatically 
 starting and recovering any database except the master database. 
@@ -32,7 +32,7 @@ BACKUP DATABASE msdb TO DISK = 'C:\BKP\msdb.bak' WITH format,compression
  cd C:\Program Files\Microsoft SQL Server\170\Setup Bootstrap\SQL2025
  setup /QUIET /ACTION=REBUILDDATABASE /INSTANCENAME=InstanceName /SQLSYSADMINACCOUNTS=accounts [ /SAPWD= StrongPassword ] [ /SQLCOLLATION=CollationName ]
 
- 2) Inicie a inst‚ncia com os parametros de inicializaÁ„o -f e -m
+ 2) Inicie a inst√¢ncia com os parametros de inicializa√ß√£o -f e -m
 
  3) Restore com o SQLCMD
 ************************************************************/

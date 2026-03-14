@@ -1,4 +1,4 @@
-/********************************************************
+ï»¿/********************************************************
  Autor: Jhadson Santos
  
  Assunto: Usando a funcionalidade de Marked Transaction no Restore
@@ -66,7 +66,7 @@ GO
 -- Completion time: 2026-02-14T12:28:22
 
 /**********************************************************
- Restore pela transação marcada
+ Restore pela transaÃ§Ã£o marcada
 ***********************************************************/
 
 ALTER DATABASE DB_MarkedTransaction SET single_user WITH rollback immediate
