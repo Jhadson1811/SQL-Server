@@ -1,7 +1,7 @@
 ﻿/*****************************************************************************************************************
  Autor: Jhadson Santos
  
- Assunto: O índice clustered defini a ordem física dos dados na tabela. A definição de um índice clustered não 
+ Assunto: O índice clustered define a ordem física dos dados na tabela. A definição de um índice clustered não 
  sequencial aumenta a frequência de divisão de páginas (Page Splits), pois ocorre a inserção de registros no meio 
  da árvore B, como consequência, temos o aumento de IO, fragmentação e baixa perfomance ao efetuar operações de INSERT. 
 
